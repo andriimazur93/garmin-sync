@@ -3,10 +3,20 @@
 User-visible changes to Local Music Sync are recorded here. This project has not yet
 published a Connect IQ Store release.
 
-## [Unreleased]
+## [0.1.1] - 2026-10-25
 
-- Use the owner-generated Local Music Sync icon for the watch launcher and
-  Store cover.
+### Changed
+
+- Rename the product display to Local Music Sync.
+- Use the owner-generated icon for the Forerunner 955 launcher and Store cover.
+
+### Validation
+
+- CI passed server tests, Python wheel build and Docker build for the source
+  commit.
+- The FR955 package compiled with Connect IQ SDK 9.3.0. The updated icon and
+  branding build have not yet been retested on physical hardware; the hardware
+  results below are from the prior release.
 
 ## [0.1.0] - 2026-10-25
 
