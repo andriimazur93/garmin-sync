@@ -1,9 +1,9 @@
 # Changelog
 
 User-visible changes to Garmin Sync are recorded here. This project has not yet
-published a tagged or Connect IQ Store release.
+published a Connect IQ Store release.
 
-## [Unreleased]
+## [0.1.0] - 2026-10-25
 
 ### Added
 
