@@ -1,5 +1,7 @@
 # Garmin Sync
 
+[![CI](https://github.com/andriimazur93/garmin-sync/actions/workflows/ci.yml/badge.svg)](https://github.com/andriimazur93/garmin-sync/actions/workflows/ci.yml)
+
 Garmin Sync is a self-hosted music manager for the Garmin Forerunner 955. Choose
 MP3s from a folder on your PC, request downloads or removals in a local browser,
 then start **Sync** on the watch. Downloaded tracks play offline through Garmin's
@@ -12,7 +14,8 @@ not treated as empty. Removing a watch copy never deletes the PC original.
 The ordinary release was tested on a Forerunner 955 running firmware 29.05:
 download, complete inventory, offline headphone playback before and after a
 restart, removal, and recovery from an unavailable HTTPS endpoint worked. A
-repeat Sync through a stable HTTPS address completed without another download.
+three-minute stereo MP3 also downloaded and played; a repeat Sync through a
+stable HTTPS address completed without another download.
 Physical interrupted-transfer recovery and storage/battery impact were not
 measured. Results on other firmware or MP3 files may differ.
 
@@ -120,13 +123,50 @@ for the watch.
 
 ## Sync and manage music
 
-1. Rescan the music folder in the PC page after changing its files.
-2. Choose **Download to watch** for a track. The request stays pending until
-   the watch reports a complete inventory.
-3. Choose **Sync** in the watch playback menu. After first contact, confirm the
-   watch/server association in the PC page before requesting removals.
-4. Review the last reported inventory and time. Choose **Remove watch copy** and
-   Sync again to remove a track from the watch while retaining the PC original.
+### First sync checklist
+
+This path assumes Ubuntu 24.04, a Forerunner 955, a local MP3 folder, and a
+stable HTTPS URL. Keep the PC awake and connected while setting up and syncing.
+
+1. **Start both server processes.** Start `serve-admin` and `serve-device` in
+   separate terminals as described above. Keep both running. Open
+   `http://127.0.0.1:8000` on the PC and confirm the management page loads.
+2. **Expose the device API.** Set up Tailscale Funnel as described above and
+   copy the `https://…ts.net` address from `tailscale funnel status`. The root
+   URL is the address alone, with no `/api` path. Confirm the device service is
+   healthy at `https://YOUR-NAME.ts.net/health` in a browser.
+3. **Create the watch configuration values.** Run the init command above
+   once, save its output privately, and copy its HTTPS root URL and device token.
+   In the watch, open **Garmin Sync → Settings** and enter both values. The
+   saved token is not shown again. Do not share the token or configuration file.
+4. **Install the app.** Build the ordinary PRG using the SDK steps above. Copy
+   `dist/garmin-sync-fr955.prg` to the watch's `GARMIN/Apps` folder over USB,
+   safely eject the watch, then open Garmin Sync from the watch's music or
+   playback menu. Development builds marked `--tests` or `--smoke` are not for
+   normal use.
+5. **Select one test track.** Put an MP3 in the configured music folder. In the
+   PC page, rescan the folder and choose **Download to watch** for that track.
+   Keep the first transfer small enough to complete comfortably.
+6. **Start sync from the watch.** Choose **Sync** in the watch app and leave it
+   connected until sync reports completion. On first contact, the PC page may
+   ask you to confirm the watch/server association. Confirm it before managing
+   removals.
+7. **Check the result.** Refresh the PC page. The track should appear in the
+   last complete watch inventory, with a recent report time. On the watch,
+   select the track in Garmin's native music player and play it through paired
+   headphones. For a true offline check, turn off Wi-Fi on the watch before
+   playback; Bluetooth headphones remain connected separately.
+
+If the watch reports a connection or request error, check that both server
+processes and Funnel are still running, the URL and token in watch Settings are
+correct, and the PC can open the HTTPS `/health` address. If sync completed but
+the PC page has not changed, reopen or refresh the page; the watch reports its
+inventory during sync. To retry a track, check its inventory and pending state
+before requesting it again.
+
+After the first sync, rescan the music folder in the PC page whenever its files
+change. Choose **Remove watch copy** and Sync again to remove a track from the
+watch while retaining the PC original.
 
 The watch downloads sequentially through Garmin's media cache. Completed work
 and cache mappings survive restarts. Missing PC source files do not request
@@ -160,6 +200,15 @@ restore, review desired music choices and run a manual Sync. If server state was
 lost, a new identity/token is created, inventory is initially unknown, and the
 watch/server association must be confirmed again before removals.
 
+## Continuous integration
+
+GitHub Actions runs the Python server test suite, builds the Python wheel and
+builds the Docker image on pushes to `main`, pull requests and manual runs. The
+wheel is available as a workflow artifact for 14 days. The Garmin watch build
+is not part of hosted CI: it requires the separately installed Connect IQ SDK
+and a private developer signing key. CI results also do not replace physical
+watch testing.
+
 ## Contribute
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development rules. The device API uses
@@ -171,3 +220,6 @@ under `src/garmin_sync/`; the watch client is under `watch/source/`.
 Project code is [Apache-2.0](LICENSE); see [third-party notices](THIRD_PARTY.md).
 Accounts, payments, browser uploads, transcoding, streaming and music from
 other providers are outside this project's scope.
+
+See [CHANGELOG.md](CHANGELOG.md) for user-visible changes and current release
+status.
