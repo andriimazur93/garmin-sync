@@ -1,7 +1,12 @@
 # Changelog
 
-User-visible changes to Garmin Sync are recorded here. This project has not yet
+User-visible changes to Local Music Sync are recorded here. This project has not yet
 published a Connect IQ Store release.
+
+## [Unreleased]
+
+- Use the owner-generated Local Music Sync icon for the watch launcher and
+  Store cover.
 
 ## [0.1.0] - 2026-10-25
 
@@ -34,4 +39,5 @@ published a Connect IQ Store release.
   impact have not been measured.
 - A private simulator driver crashes during a removal scenario; the ordinary
   release simulator and the tested hardware workflow did not reproduce it.
-- No tagged GitHub release or Connect IQ Store package is available yet.
+- The v0.1.0 GitHub release uses the former Garmin Sync display name; the Store
+  candidate uses Local Music Sync. The Store package has not been submitted.

@@ -7,7 +7,7 @@ name = "garmin-sync"
 version = "0.1.0"
 description = "Self-hosted personal music synchronization for Garmin watches"
 license = {file = "LICENSE"}
-authors = [{name = "Garmin Sync contributors"}]
+authors = [{name = "Local Music Sync contributors"}]
 requires-python = ">=3.12"
 dependencies = ["fastapi>=0.162,<0.163", "uvicorn>=0.54,<0.55"]
 

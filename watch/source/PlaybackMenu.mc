@@ -6,7 +6,7 @@ import Toybox.WatchUi;
 
 class PlaybackMenu extends WatchUi.Menu2 {
     function initialize() {
-        Menu2.initialize({:title => "Garmin Sync"});
+        Menu2.initialize({:title => "Local Music Sync"});
         addItem(new WatchUi.MenuItem("Sync", "Apply PC choices", "sync", {}));
         addItem(new WatchUi.MenuItem("Settings", null, "settings", {}));
         var library = new LocalLibrary(null);

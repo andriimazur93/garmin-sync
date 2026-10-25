@@ -1,8 +1,8 @@
-# Garmin Sync
+# Local Music Sync
 
 [![CI](https://github.com/andriimazur93/garmin-sync/actions/workflows/ci.yml/badge.svg)](https://github.com/andriimazur93/garmin-sync/actions/workflows/ci.yml)
 
-Garmin Sync is a self-hosted music manager for the Garmin Forerunner 955. Choose
+Local Music Sync is a self-hosted music manager for the Garmin Forerunner 955. Choose
 MP3s from a folder on your PC, request downloads or removals in a local browser,
 then start **Sync** on the watch. Downloaded tracks play offline through Garmin's
 native music player.
@@ -137,11 +137,11 @@ stable HTTPS URL. Keep the PC awake and connected while setting up and syncing.
    healthy at `https://YOUR-NAME.ts.net/health` in a browser.
 3. **Create the watch configuration values.** Run the init command above
    once, save its output privately, and copy its HTTPS root URL and device token.
-   In the watch, open **Garmin Sync → Settings** and enter both values. The
+   In the watch, open **Local Music Sync → Settings** and enter both values. The
    saved token is not shown again. Do not share the token or configuration file.
 4. **Install the app.** Build the ordinary PRG using the SDK steps above. Copy
    `dist/garmin-sync-fr955.prg` to the watch's `GARMIN/Apps` folder over USB,
-   safely eject the watch, then open Garmin Sync from the watch's music or
+   safely eject the watch, then open Local Music Sync from the watch's music or
    playback menu. Development builds marked `--tests` or `--smoke` are not for
    normal use.
 5. **Select one test track.** Put an MP3 in the configured music folder. In the

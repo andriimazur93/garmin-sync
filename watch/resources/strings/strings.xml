@@ -1,5 +1,5 @@
 <strings>
-    <string id="AppName">Garmin Sync</string>
+    <string id="AppName">Local Music Sync</string>
     <string id="ServerUrlTitle">HTTPS server URL</string>
     <string id="DeviceTokenTitle">Device token</string>
     <!-- Test-only identifiers. Release values are non-secret placeholders. -->

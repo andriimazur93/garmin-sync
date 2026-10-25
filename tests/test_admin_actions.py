@@ -9,7 +9,7 @@ def test_management_assets_are_local_and_have_no_inline_script(tmp_path):
     admin = TestClient(create_admin_app(settings), base_url='http://127.0.0.1:8000')
     page = admin.get('/')
     assert page.status_code == 200
-    assert 'Garmin Sync' in page.text and '/static/app.js' in page.text
+    assert 'Local Music Sync' in page.text and '/static/app.js' in page.text
     assert "frame-ancestors 'none'" in page.headers['content-security-policy']
     assert admin.get('/static/app.js').status_code == 200
     assert admin.get('/static/style.css').status_code == 200
