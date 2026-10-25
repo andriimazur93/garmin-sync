@@ -1,0 +1,53 @@
+name: garmin-sync
+
+x-server: &server
+  image: garmin-sync:local
+  build: .
+  environment:
+    GARMIN_SYNC_BIND: 0.0.0.0
+    GARMIN_SYNC_DATA: /data
+    GARMIN_SYNC_MUSIC: /music
+  volumes:
+    - state:/data
+    - scratch:/scratch
+    - type: bind
+      source: ${GARMIN_SYNC_MUSIC:?Set GARMIN_SYNC_MUSIC to an existing MP3 directory}
+      target: /music
+      read_only: true
+      bind:
+        create_host_path: false
+  read_only: true
+  tmpfs:
+    - /tmp:rw,noexec,nosuid,size=64m
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  restart: unless-stopped
+
+services:
+  admin:
+    <<: *server
+    command: [python, -m, garmin_sync.cli, serve-admin]
+    ports:
+      - "127.0.0.1:${GARMIN_SYNC_ADMIN_PORT:-8000}:8000"
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  device:
+    <<: *server
+    command: [python, -m, garmin_sync.cli, serve-device]
+    depends_on:
+      admin:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${GARMIN_SYNC_DEVICE_PORT:-8001}:8001"
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/health', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  state:
+  scratch:

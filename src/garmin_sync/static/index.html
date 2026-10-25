@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Garmin Sync</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <div><p class="eyebrow">Your music, on your watch</p><h1>Garmin Sync<span class="dot">.</span></h1></div>
+      <button id="rescan" class="secondary" type="button">Rescan PC music</button>
+    </header>
+    <p class="intro">Choose your music here. Start <strong>Sync</strong> on your watch to apply your choices.</p>
+    <p id="connection" class="connection" role="status">Connecting to the local server…</p>
+    <p id="feedback" role="status" aria-live="polite"></p>
+    <section class="stats" aria-label="Library overview">
+      <div><span id="available-count">—</span><p>Available on PC</p></div>
+      <div><span id="watch-count">Unknown</span><p>Last reported on watch</p></div>
+      <div><span id="pending-count">—</span><p>Pending choices</p></div>
+    </section>
+    <aside id="association" class="association"></aside>
+    <section class="panel" aria-labelledby="library-title">
+      <div class="section-heading"><h2 id="library-title">PC library</h2><p>Original files stay on your PC.</p></div>
+      <div id="library"><p class="empty">Loading your library…</p></div>
+    </section>
+    <section class="panel" aria-labelledby="watch-title">
+      <div class="section-heading"><h2 id="watch-title">Last reported watch contents</h2><p id="reported-time">No complete report yet</p></div>
+      <p id="sync-outcome" class="muted"></p>
+      <div id="watch"><p class="empty">Inventory is unknown until the watch reports it.</p></div>
+    </section>
+    <footer>Changes take effect during a sync you start on the watch. The report above shows its last complete inventory.</footer>
+  </main>
+</body>
+</html>

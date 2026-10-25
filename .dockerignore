@@ -1,0 +1,14 @@
+# Allowlist the server build inputs; never send private/local/watch assets.
+**
+!Dockerfile
+!pyproject.toml
+!requirements.lock
+!requirements-build.lock
+!LICENSE
+!NOTICE
+!THIRD_PARTY.md
+!src/
+!src/garmin_sync/
+!src/garmin_sync/**
+**/__pycache__/**
+**/*.pyc

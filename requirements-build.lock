@@ -1,0 +1,3 @@
+# Tested build tools; install before --no-build-isolation package builds.
+setuptools==80.9.0
+wheel==0.45.1

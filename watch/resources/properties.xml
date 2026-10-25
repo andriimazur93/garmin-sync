@@ -1,0 +1,4 @@
+<properties>
+    <property id="ServerUrl" type="string">https://</property>
+    <property id="DeviceToken" type="string">UNCONFIGURED</property>
+</properties>

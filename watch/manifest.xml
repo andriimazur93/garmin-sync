@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iq:manifest xmlns:iq="http://www.garmin.com/xml/connectiq" version="3">
+    <iq:application id="415fbd216f704bb68d1aaea83d938672" type="audio-content-provider-app" name="@Strings.AppName" entry="App" launcherIcon="@Drawables.LauncherIcon" minApiLevel="3.1.0" version="0.1.0">
+        <iq:products><iq:product id="fr955"/></iq:products>
+        <iq:permissions><iq:uses-permission id="Communications"/></iq:permissions>
+        <iq:languages><iq:language>eng</iq:language></iq:languages>
+        <iq:barrels/>
+    </iq:application>
+</iq:manifest>

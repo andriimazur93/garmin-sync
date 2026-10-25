@@ -1,0 +1,12 @@
+<strings>
+    <string id="AppName">Garmin Sync</string>
+    <string id="ServerUrlTitle">HTTPS server URL</string>
+    <string id="DeviceTokenTitle">Device token</string>
+    <!-- Test-only identifiers. Release values are non-secret placeholders. -->
+    <string id="SmokeUrl">UNCONFIGURED</string>
+    <string id="SmokeToken">UNCONFIGURED</string>
+    <string id="SmokeTrackId">UNCONFIGURED</string>
+    <string id="SmokeRunId">UNCONFIGURED</string>
+    <string id="SmokeSessionId">UNCONFIGURED</string>
+    <string id="SmokeBaseUrl">UNCONFIGURED</string>
+</strings>

@@ -1,0 +1,8 @@
+<settings>
+    <setting propertyKey="@Properties.ServerUrl" title="@Strings.ServerUrlTitle">
+        <settingConfig type="alphaNumeric" maxLength="256"/>
+    </setting>
+    <setting propertyKey="@Properties.DeviceToken" title="@Strings.DeviceTokenTitle">
+        <settingConfig type="alphaNumeric" maxLength="256"/>
+    </setting>
+</settings>
