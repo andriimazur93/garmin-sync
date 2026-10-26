@@ -1,0 +1,62 @@
+name: Bug report
+description: Report a problem with setup, the PC page, watch sync or offline playback.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please search existing issues before reporting a problem.
+        Redact device/bearer tokens, private server URLs, personal paths and music
+        details from text, logs and screenshots. Do not attach settings or
+        configuration files.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What is the problem?
+      description: Briefly describe what stopped working and where it happens.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Versions and environment
+      description: Include what you know; unknown or not applicable is fine. Watch model and firmware are only needed for watch problems. No SDK or signing key is needed to report a bug.
+      placeholder: |
+        Server version or commit:
+        Watch app version (if applicable):
+        PC operating system and setup (Docker or native Python):
+        Browser (for PC page problems):
+        Watch model and firmware (for watch problems):
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Describe the actions on the PC and watch that lead to the problem. If it is intermittent, say how often it happens.
+      placeholder: |
+        1. On the PC...
+        2. On the watch...
+        3. The problem appears when...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What happened instead? Include the error text and whether the PC page still shows pending choices or an older watch report, if relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Logs or screenshots (optional)
+      description: Paste a short redacted log excerpt or attach a screenshot. Remove tokens, private URLs, personal paths and music details first. Do not attach settings or configuration files.
+    validations:
+      required: false

@@ -1,0 +1,38 @@
+name: Feature request
+description: Suggest an improvement to Local Music Sync.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please search existing issues before suggesting an improvement.
+        Redact device/bearer tokens, private server URLs, personal paths and music
+        details from text or screenshots. Do not attach settings or configuration
+        files. You do not need to propose an implementation.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: What are you trying to do, and what makes it difficult today?
+    validations:
+      required: true
+  - type: textarea
+    id: improvement
+    attributes:
+      label: Requested improvement
+      description: Describe the behavior you would like and how it would help you.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives or workarounds (optional)
+      description: Have you tried another way to solve this problem?
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context (optional)
+      description: Add any relevant examples or redacted screenshots. Avoid private configuration and personal music details.
+    validations:
+      required: false
