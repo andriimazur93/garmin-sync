@@ -7,6 +7,9 @@ published a Connect IQ Store release.
 
 ### Changed
 
+- Add an ordered first-time setup guide, a prominent README entry point and
+  watch-menu screenshots. Clarify released-PRG installation and the separate
+  sources of the device token and HTTPS URL.
 - Redesign the PC page with an iTunes-inspired toolbar, sidebar and responsive
   song list, combining catalog and reported watch contents in one library.
 - Add filename search, On watch / Pending / Needs attention views, a pending

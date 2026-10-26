@@ -7,6 +7,9 @@ MP3s from a folder on your PC, request downloads or removals in a local browser,
 then start **Sync** on the watch. Downloaded tracks play offline through Garmin's
 native music player.
 
+**First time here?** Follow [Getting started](GETTING_STARTED.md) for the ordered
+PC setup, HTTPS connection, watch installation and first music sync.
+
 It supports one owner, one watch and one MP3 directory. The PC shows the watch's
 last **complete reported inventory** and its timestamp; a disconnected watch is
 not treated as empty. Removing a watch copy never deletes the PC original.
@@ -20,6 +23,13 @@ Physical interrupted-transfer recovery and storage/battery impact were not
 measured. Results on other firmware or MP3 files may differ.
 
 ## Screenshots
+
+Forerunner 955 captures showing the music-provider list and the app menu.
+The provider-list capture shows an earlier app icon.
+
+| Select the music provider | Start sync or open settings |
+| --- | --- |
+| ![Local Music Sync in the watch music-provider list](assets/screenshots/watch-provider-list.png) | ![Local Music Sync watch menu with Sync and Settings](assets/screenshots/watch-menu.png) |
 
 The management page on desktop, showing music choices, pending changes and the
 watch's last reported inventory. Both browser screenshots use sample music and a simulated
@@ -39,7 +49,7 @@ Tested on Ubuntu 24.04 with Python 3.12. Use a project-local environment:
 python3.12 -m venv .venv
 .venv/bin/python -m pip install -r requirements-build.lock
 .venv/bin/python -m pip install --no-build-isolation -r requirements-dev.lock
-cp .env.example .env
+cp -n .env.example .env
 ```
 
 Edit `.env`: set `GARMIN_SYNC_MUSIC` to an existing MP3 directory and
@@ -147,15 +157,16 @@ stable HTTPS URL. Keep the PC awake and connected while setting up and syncing.
    copy the `https://…ts.net` address from `tailscale funnel status`. The root
    URL is the address alone, with no `/api` path. Confirm the device service is
    healthy at `https://YOUR-NAME.ts.net/health` in a browser.
-3. **Create the watch configuration values.** Run the init command above
-   once, save its output privately, and copy its HTTPS root URL and device token.
-   In the watch, open **Local Music Sync → Settings** and enter both values. The
-   saved token is not shown again. Do not share the token or configuration file.
-4. **Install the app.** Build the ordinary PRG using the SDK steps above. Copy
-   `dist/garmin-sync-fr955.prg` to the watch's `GARMIN/Apps` folder over USB,
-   safely eject the watch, then open Local Music Sync from the watch's music or
-   playback menu. Development builds marked `--tests` or `--smoke` are not for
-   normal use.
+3. **Save the device token.** Run the init command above once and save its
+   output privately. It contains `device_token` and `server_id`; the HTTPS root
+   URL comes separately from Funnel. Do not share the token or configuration file.
+4. **Install and configure the app.** Get the ordinary FR955 PRG and matching
+   checksum from [GitHub Releases](https://github.com/andriimazur93/local-garmin-music-sync/releases),
+   or build it using the SDK steps above. Copy the PRG to the watch's
+   `GARMIN/Apps` folder over USB, safely eject the watch, then open
+   **Local Music Sync → Settings** and enter the HTTPS root URL and device token.
+   The saved token is not shown again. Development builds marked `--tests` or
+   `--smoke` are not for normal use.
 5. **Select one test track.** Put an MP3 in the configured music folder. In the
    PC page, rescan the folder and choose **Download to watch** for that track.
    Keep the first transfer small enough to complete comfortably.
