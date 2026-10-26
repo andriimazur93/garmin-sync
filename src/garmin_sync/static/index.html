@@ -8,30 +8,52 @@
   <script src="/static/app.js" defer></script>
 </head>
 <body>
-  <main>
-    <header>
-      <div><p class="eyebrow">Your music, on your watch</p><h1>Local Music Sync<span class="dot">.</span></h1></div>
-      <button id="rescan" class="secondary" type="button">Rescan PC music</button>
+  <a class="skip-link" href="#main">Skip to music library</a>
+  <div class="app">
+    <header class="toolbar">
+      <div class="brand"><span class="app-icon" aria-hidden="true">♫</span>Local Music Sync</div>
+      <div class="toolbar-message"><strong>Your music, on your watch.</strong><p>Choose tracks here. Start Sync on your watch.</p></div>
+      <label class="search-label"><span class="sr-only">Search library</span><input id="search" type="search" placeholder="Search library" autocomplete="off"></label>
     </header>
-    <p class="intro">Choose your music here. Start <strong>Sync</strong> on your watch to apply your choices.</p>
-    <p id="connection" class="connection" role="status">Connecting to the local server…</p>
-    <p id="feedback" role="status" aria-live="polite"></p>
-    <section class="stats" aria-label="Library overview">
-      <div><span id="available-count">—</span><p>Available on PC</p></div>
-      <div><span id="watch-count">Unknown</span><p>Last reported on watch</p></div>
-      <div><span id="pending-count">—</span><p>Pending choices</p></div>
-    </section>
-    <aside id="association" class="association"></aside>
-    <section class="panel" aria-labelledby="library-title">
-      <div class="section-heading"><h2 id="library-title">PC library</h2><p>Original files stay on your PC.</p></div>
-      <div id="library"><p class="empty">Loading your library…</p></div>
-    </section>
-    <section class="panel" aria-labelledby="watch-title">
-      <div class="section-heading"><h2 id="watch-title">Last reported watch contents</h2><p id="reported-time">No complete report yet</p></div>
-      <p id="sync-outcome" class="muted"></p>
-      <div id="watch"><p class="empty">Inventory is unknown until the watch reports it.</p></div>
-    </section>
-    <footer>Changes take effect during a sync you start on the watch. The report above shows its last complete inventory.</footer>
-  </main>
+    <aside class="sidebar">
+      <nav aria-label="Library views">
+        <p class="nav-heading">Library</p>
+        <div class="views">
+          <button type="button" class="nav-item active" data-filter="all" aria-pressed="true"><span class="nav-icon" aria-hidden="true">♫</span>Songs<span id="all-count" class="count">—</span></button>
+          <button type="button" class="nav-item" data-filter="watch" aria-pressed="false"><span class="nav-icon" aria-hidden="true">▣</span>On watch<span id="watch-count" class="count">Unknown</span></button>
+          <button type="button" class="nav-item" data-filter="pending" aria-pressed="false"><span class="nav-icon" aria-hidden="true">↻</span>Pending<span id="pending-count" class="count">—</span></button>
+          <button type="button" class="nav-item" data-filter="attention" aria-pressed="false"><span class="nav-icon" aria-hidden="true">!</span>Needs attention<span id="attention-count" class="count">—</span></button>
+        </div>
+      </nav>
+      <div class="manage"><p class="nav-heading">Manage</p><button id="setup-toggle" type="button" class="nav-item" aria-expanded="false" aria-controls="setup-panel"><span class="nav-icon" aria-hidden="true">⚙</span>Setup &amp; connection</button></div>
+      <div class="sidebar-footer">Self-hosted.<br>Your music stays yours.</div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div class="heading"><div><h1 id="view-title">Songs</h1><p>Your library. Choose what comes with you.</p></div><button id="rescan" class="secondary" type="button" data-mutation disabled><span aria-hidden="true">↻ &nbsp;</span>Rescan PC music</button></div>
+      <div class="connection-line"><p id="connection" role="status">Connecting to the local server…</p><button type="button" id="retry" class="text-button" hidden>Retry connection</button></div>
+      <section id="setup-panel" class="setup-panel" aria-labelledby="setup-title" hidden>
+        <h2 id="setup-title">Setup &amp; connection</h2>
+        <p id="association-state">Waiting for local server status.</p>
+        <p>Add MP3 files to your configured music folder, then choose Rescan PC music. Your original files stay on your PC.</p>
+        <p>Configure the HTTPS server URL and device token in Local Music Sync → Settings on your watch. Keep both PC server processes and your HTTPS tunnel running during sync.</p>
+        <p>To change the PC music folder or server configuration, use your existing installation settings and restart the services. This page does not edit credentials.</p>
+      </section>
+      <aside id="association" class="association" aria-label="Watch connection confirmation" hidden></aside>
+      <section class="sync-banner" aria-labelledby="pending-summary"><span class="sync-icon" aria-hidden="true">↻</span><div><h2 id="pending-summary">Loading your choices…</h2><p id="sync-guidance">Changes take effect during a sync you start on the watch.</p></div><button type="button" id="review" class="secondary">Review changes</button></section>
+      <p id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+      <div class="view-bar"><p id="view-count">Loading library…</p><p>Watch status reflects its last complete report</p></div>
+      <div id="library" aria-busy="true">
+        <table id="library-table" hidden>
+          <caption class="sr-only">Music library. Watch status and requested changes are shown separately.</caption>
+          <thead><tr><th scope="col" class="number">#</th><th scope="col">Name</th><th scope="col" class="size">Size</th><th scope="col">Watch status / request</th><th scope="col" class="choice-heading">Your choice</th></tr></thead>
+          <tbody id="library-body"></tbody>
+        </table>
+        <p id="empty" class="empty">Loading your music library…</p>
+      </div>
+      <div class="report"><p id="reported-time">No complete report received by this page yet.</p><p id="sync-outcome">Waiting for sync status.</p></div>
+      <footer><strong>Removing a watch copy keeps the original on your PC.</strong><p>Watch contents may have changed since the last complete report.</p></footer>
+      <noscript>This management page needs JavaScript to load your library and save choices.</noscript>
+    </main>
+  </div>
 </body>
 </html>

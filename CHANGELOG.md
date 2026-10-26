@@ -3,6 +3,24 @@
 User-visible changes to Local Music Sync are recorded here. This project has not yet
 published a Connect IQ Store release.
 
+## [Unreleased]
+
+### Changed
+
+- Redesign the PC page with an iTunes-inspired toolbar, sidebar and responsive
+  song list, combining catalog and reported watch contents in one library.
+- Add filename search, On watch / Pending / Needs attention views, a pending
+  changes summary, connection retry and setup guidance.
+- Preserve search and keyboard focus across status polling, and keep requested
+  changes separate from the last complete watch report.
+
+### Validation
+
+- Browser interaction checks cover choices, filters, report preservation,
+  association confirmation, errors, keyboard focus and mobile layouts.
+- Screenshots in the README use fixture data. This frontend change does not
+  establish new watch hardware or firmware compatibility.
+
 ## [0.1.1] - 2026-10-25
 
 ### Changed

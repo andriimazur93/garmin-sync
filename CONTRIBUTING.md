@@ -23,6 +23,27 @@ failing regression before behavioral changes, then verify the relevant suite.
 Protocol changes update the README's protocol summary and both clients.
 Documentation/configuration changes use proportionate direct checks.
 
+For frontend changes, run the optional browser checks with Node.js 22+ and
+Playwright 1.64.1. These are development tools; the application still needs no
+frontend build or Node runtime:
+
+```bash
+npm install --prefix .local/browser --no-save playwright@1.64.1
+.local/browser/node_modules/.bin/playwright install chromium
+PLAYWRIGHT_MODULE="$PWD/.local/browser/node_modules/playwright" \
+  node --test tests/browser-ui.cjs
+```
+
+The runner serves the real static assets with fixture API responses on an
+ephemeral loopback port, then checks browser choices and CSRF rejection against
+an isolated FastAPI server using a temporary MP3 folder and database. It uses
+the project `.venv/bin/python` by default; `UI_PYTHON` can select another project
+virtual environment. The full server integration/security suite remains in pytest.
+Set `UI_SCREENSHOTS=assets/screenshots` when running the browser command to
+refresh fixture-only screenshots. `CHROMIUM_PATH` can select an already installed
+Chromium executable. The current CI workflow runs Python/package/container
+checks; browser checks run separately.
+
 Watch builds require the separately installed SDK/device package and external
 signing key described in the README. Simulator evidence never
 establishes physical decoding or headphone playback.
