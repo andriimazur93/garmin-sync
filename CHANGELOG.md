@@ -7,6 +7,8 @@ published a Connect IQ Store release.
 
 ### Changed
 
+- Add reusable GitHub bug-report and feature-request forms, with guidance for
+  relevant environment details and redacting private configuration.
 - Add an ordered first-time setup guide, a prominent README entry point and
   watch-menu screenshots. Clarify released-PRG installation and the separate
   sources of the device token and HTTPS URL.
