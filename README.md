@@ -19,6 +19,18 @@ stable HTTPS address completed without another download.
 Physical interrupted-transfer recovery and storage/battery impact were not
 measured. Results on other firmware or MP3 files may differ.
 
+## Screenshots
+
+The management page on desktop, showing music choices, pending changes and the
+watch's last reported inventory. Both browser screenshots use sample music and a simulated
+report; they are interface previews rather than physical-watch validation.
+
+![Desktop music library with pending downloads and a removal](assets/screenshots/library-desktop.png)
+
+Mobile layout:
+
+<img src="assets/screenshots/library-mobile.png" alt="Mobile music library with track status and download or removal controls" width="390">
+
 ## Run the PC server
 
 Tested on Ubuntu 24.04 with Python 3.12. Use a project-local environment:
@@ -167,6 +179,27 @@ before requesting it again.
 After the first sync, rescan the music folder in the PC page whenever its files
 change. Choose **Remove watch copy** and Sync again to remove a track from the
 watch while retaining the PC original.
+
+### Manage your library
+
+The PC page uses one searchable song list. **Songs** shows the full library,
+**On watch** shows the last complete reported contents, **Pending** shows
+requested downloads and removals, and **Needs attention** shows unavailable
+sources, operation errors and retained unknown cache entries. Search combines
+with the selected view.
+
+The pending banner summarizes your choices; **Review changes** opens the Pending
+view. Use **Cancel download request** or **Keep on watch** to change a pending
+choice where available. Start **Sync on the watch** to apply choices. Changes
+made during a sync may need another sync because its plan is already fixed.
+
+**Setup & connection** contains setup guidance and the watch association status;
+new associations also display a confirmation prompt. URL/token changes still
+use watch Settings, and PC folder changes use your installation configuration.
+The page refreshes while visible and preserves search and keyboard focus. If the
+local server disconnects, the last report remains displayed with its timestamp;
+**Retry connection** reloads status. A connected PC server does not mean the
+watch is online. Before the first complete report, watch inventory is unknown.
 
 The watch downloads sequentially through Garmin's media cache. Completed work
 and cache mappings survive restarts. Missing PC source files do not request
